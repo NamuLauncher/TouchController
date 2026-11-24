@@ -21,8 +21,6 @@ class AndroidPlatform(name: String) : LargeMessageWrappedPlatform() {
         get() = true
 
     private val logger = LoggerFactory.getLogger(AndroidPlatform::class.java)
-    // The native transport is freed by close(). Minecraft may still render a frame (and poll events)
-    // after CLIENT_STOPPING closed the platform, so a closed handle must never reach native code again.
     @Volatile
     private var handle = Transport.new(name)
     private val readBuffer = ByteArray(256)
